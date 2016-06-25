@@ -1,0 +1,4 @@
+1466895108171:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\BaseController.js>[N/A](N/A)->BaseController.ioc=[]
+1466895108162:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](N/A)->booter={"getRegexp":{},"postRegexp":{},"preRegexp":{},"function_params_regex":{},"controllers":[],"routes":[]}
+1466895108184:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->ioc.undefined=undefined
+1466895108184:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->UserController.ioc=[]
