@@ -46,10 +46,10 @@ var UserController = function (_BaseController) {
     }
 
     (0, _createClass3.default)(UserController, [{
-        key: 'getId',
-        value: function getId(id, UserService) {
+        key: 'get',
+        value: function get(id, UserService) {
             var user = UserService.find(id);
-            this.res.send(user);
+            this.res.send('Hello World');
         }
     }, {
         key: 'postCreate',
@@ -58,11 +58,6 @@ var UserController = function (_BaseController) {
                 firstname: firstname,
                 lastname: lastname
             });
-        }
-    }, {
-        key: 'name',
-        get: function get() {
-            return 'UserController';
         }
     }], [{
         key: 'route',
@@ -97,6 +92,12 @@ ioc['UserService'] = {
     findOne: function findOne(id) {
         var results = this.find(id);
         return results.length ? results[0] : null;
+    },
+    delete: function _delete(id) {
+        var index = this.store.indexOf(id);
+        if (~index) {
+            this.store.slice(index, 1);
+        }
     }
 };
 hot_pepper_logger.log({

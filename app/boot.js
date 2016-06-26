@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.boot = exports.Boot = undefined;
+
 var _ControllerBooter = require('./lib/ControllerBooter');
 
 var _ControllerBooter2 = _interopRequireDefault(_ControllerBooter);
@@ -18,5 +23,22 @@ hot_pepper_logger.log({
     'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
     'variable': 'booter'
 }, booter);
-booter.start();
-booter.listen(3000);
+var Boot = exports.Boot = function Boot(port) {
+    port = port || 3000;
+    hot_pepper_logger.log({
+        'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
+        'method': 'anonymous',
+        'variable': 'port'
+    }, port);
+    booter.start();
+    booter.listen(3000);
+};
+hot_pepper_logger.log({
+    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
+    'variable': 'Boot'
+}, Boot);
+var boot = exports.boot = Boot;
+hot_pepper_logger.log({
+    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
+    'variable': 'boot'
+}, boot);

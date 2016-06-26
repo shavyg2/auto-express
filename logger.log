@@ -1,4 +1,7 @@
-1466895108171:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\BaseController.js>[N/A](N/A)->BaseController.ioc=[]
-1466895108162:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](N/A)->booter={"getRegexp":{},"postRegexp":{},"preRegexp":{},"function_params_regex":{},"controllers":[],"routes":[]}
-1466895108184:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->ioc.undefined=undefined
-1466895108184:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->UserController.ioc=[]
+1466955644436:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](N/A)->booter={"getRegexp":{},"postRegexp":{},"preRegexp":{},"function_params_regex":{},"controllers":[],"routes":[]}
+1466955644437:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](N/A)->Boot=function Boot(port) {\n    port = port || 3000;\n    hot_pepper_logger.log({\n        'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',\n        'method': 'anonymous',\n        'variable': 'port'\n    }, port);\n    booter.start();\n    booter.listen(3000);\n}
+1466955644438:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](N/A)->boot=function Boot(port) {\n    port = port || 3000;\n    hot_pepper_logger.log({\n        'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',\n        'method': 'anonymous',\n        'variable': 'port'\n    }, port);\n    booter.start();\n    booter.listen(3000);\n}
+1466955644438:<C:\Users\shava\Documents\dev\TaskFactor\src\app\boot.js>[N/A](anonymous)->port=3000
+1466955644447:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\BaseController.js>[N/A](N/A)->BaseController.ioc=[]
+1466955644456:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->ioc.undefined=undefined
+1466955644456:<C:\Users\shava\Documents\dev\TaskFactor\src\Controller\UserController.js>[N/A](N/A)->UserController.ioc=[]

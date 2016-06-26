@@ -10,6 +10,12 @@ export default class ControllerLoader {
     this.app = express();
     this.getRegexp = /^get/i;
     this.postRegexp = /^post/i;
+    
+    this.postRegexp = /^post/i;
+    this.postRegexp = /^post/i;
+    this.postRegexp = /^post/i;
+    this.postRegexp = /^post/i;
+    this.postRegexp = /^post/i;
     this.preRegexp = /^pre/i;
     this.function_params_regex = /\(([^)]+)\)/
     this.controllers = [];
@@ -59,7 +65,7 @@ export default class ControllerLoader {
   }
 
   parseMethodName(meta, key, method) {
-    meta.name = decamelize(key.replace(meta.regex, ""));
+    meta.name = decamelize(key.replace(meta.regex, "")) || "/";
     meta.functionName = key;
     const method_as_string = method.toString();
     meta.functionString = method_as_string;

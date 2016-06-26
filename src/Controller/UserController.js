@@ -2,17 +2,19 @@ import BaseController from "./BaseController";
 import _ from "lodash";
 
 export default class UserController extends BaseController {
+  /****************************
+
+    When the constructor is called
+    the user doesn't have access to alot of information
+
+  *****************************/
   constructor() {
     super();
   }
 
-  get name() {
-    return "UserController";
-  }
-
-  getId(id,UserService) {
+  get(id,UserService) {
     var user = UserService.find(id);
-    this.res.send(user);
+    this.res.send("Hello World");
   }
 
   postCreate(firstname,lastname,UserService){
@@ -22,7 +24,6 @@ export default class UserController extends BaseController {
       });
   }
 
-
   static get route() {
     return "/user";
   }
@@ -31,6 +32,8 @@ export default class UserController extends BaseController {
 
 
 let ioc;
+
+
 UserController.ioc = ioc = [];
 
 ioc["UserService"] = {
@@ -47,5 +50,14 @@ ioc["UserService"] = {
   findOne: function(id) {
     var results = this.find(id);
     return results.length ? results[0] : null
+  },
+  delete:function(id){
+    var index = this.store.indexOf(id);
+    //cute trick
+    if(~index){
+      this.store.slice(index,1);
+      //Baby Gone Gone
+    }
   }
+
 }

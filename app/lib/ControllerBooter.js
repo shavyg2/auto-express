@@ -153,7 +153,6 @@ var ControllerBooter = function (_ControllerLoader) {
                         url = url + ':' + param + '/';
                         param_builder.push(function (param) {
                             return function (req, res) {
-                                console.log(req.params);
                                 return req.params[param];
                             };
                         }(param));
@@ -174,11 +173,17 @@ var ControllerBooter = function (_ControllerLoader) {
                 }
             }
 
-            route[method_meta.type].call(route, '/' + method_meta.name + url, function (req, res, next) {
+            var static_route = '/' + method_meta.name + url;
+            static_route = static_route.replace(/\/{2,}/g, '/');
+            route[method_meta.type].call(route, static_route, function (req, res, next) {
                 var controller = new _controller.class();
                 controller.req = req;
                 controller.res = res;
                 controller.next = next;
+                controller.local = res.local;
+                controller.global = req.app.local;
+                controller.app = req.app;
+                controller.params = req.params;
                 var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
                     return x(req, res);
                 }).value();

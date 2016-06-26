@@ -18,5 +18,4 @@ describe("BaseController Test", function() {
   it('Should return null when register is called', function() {
     should.not.exist(controller.register())
   })
-
 })

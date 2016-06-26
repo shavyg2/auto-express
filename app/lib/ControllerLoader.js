@@ -39,6 +39,11 @@ var ControllerLoader = function () {
         this.app = express();
         this.getRegexp = /^get/i;
         this.postRegexp = /^post/i;
+        this.postRegexp = /^post/i;
+        this.postRegexp = /^post/i;
+        this.postRegexp = /^post/i;
+        this.postRegexp = /^post/i;
+        this.postRegexp = /^post/i;
         this.preRegexp = /^pre/i;
         this.function_params_regex = /\(([^)]+)\)/;
         this.controllers = [];
@@ -90,7 +95,7 @@ var ControllerLoader = function () {
     }, {
         key: 'parseMethodName',
         value: function parseMethodName(meta, key, method) {
-            meta.name = (0, _decamelize2.default)(key.replace(meta.regex, ''));
+            meta.name = (0, _decamelize2.default)(key.replace(meta.regex, '')) || '/';
             meta.functionName = key;
             var method_as_string = method.toString();
             meta.functionString = method_as_string;

@@ -26,17 +26,7 @@ var BaseController = function () {
         (0, _classCallCheck3.default)(this, BaseController);
     }
 
-    (0, _createClass3.default)(BaseController, [{
-        key: 'getName',
-        value: function getName() {
-            return this.name;
-        }
-    }, {
-        key: 'name',
-        get: function get() {
-            return 'BaseController';
-        }
-    }], [{
+    (0, _createClass3.default)(BaseController, null, [{
         key: 'route',
         get: function get() {
             return '/';
