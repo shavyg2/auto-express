@@ -182,7 +182,7 @@ var ControllerBooter = function (_ControllerLoader) {
                Meta Data
              ***********************************/
 
-            console.log(_controller.class.route + "/" + method_meta.type.toUpperCase() + ": " + static_route);
+            console.log(method_meta.type.toUpperCase() + ": " + _controller.class.route + "/" + static_route);
 
             /***************************************
                Meta Data end
