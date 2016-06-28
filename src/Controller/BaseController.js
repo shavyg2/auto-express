@@ -20,7 +20,6 @@ export default class BaseController {
     let next = function(){
       if(pre.length>0){
         let now = pre.shift();
-        console.log(now,pre.length);
         now(self.req,self.res,next);
       }else{
         if(_.isFunction(cb)){
