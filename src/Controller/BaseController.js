@@ -9,7 +9,6 @@ export default class BaseController {
     return "/";
   }
 
-
   pre(func){
     this._pre.push(func);
     return this;
@@ -21,6 +20,7 @@ export default class BaseController {
     let next = function(){
       if(pre.length>0){
         let now = pre.unshift();
+        console.log(now,pre.length);
         now(self.req,self.res,next);
       }else{
         if(_.isFunction(cb)){
