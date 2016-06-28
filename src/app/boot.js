@@ -14,12 +14,6 @@ import express from "express";
 
 
 
-
-
-
-
-
-
 /******************************************
 
   Place custom express routes on booter.app
@@ -32,14 +26,13 @@ let booter = new ControllerBooter(express);
 
 
 
-export let Boot = function(port){
+export let Boot = function(port,cb){
   port = port || 3000;
   /******************************************
 
   This is a sync operation that will load
-  all the controllers and creates the route
-  for the controllers.
-  This is a sync operation
+  all the controllers and creates the
+  route for the controllers.
 
   ******************************************/
   booter.start();
@@ -50,7 +43,9 @@ export let Boot = function(port){
   This will start you application.
   booter exposes the booter.app property
   *********************************/
-  booter.listen(3000);
+  booter.listen(3000,cb);
+
+  return booter;
 }
 
 
