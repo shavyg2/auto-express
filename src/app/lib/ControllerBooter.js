@@ -57,6 +57,16 @@ export default class ControllerBooter extends ControllerLoader {
                 param_builder.push(function(req, res) {
                     return _controller.class.ioc[param];
                 })
+            } else if (param && param[0]==="$") {
+              param_builder.push(function(param){
+                return function(req,res){
+                  if(req.body && req.body[param.substring(1)]){
+                    return req.body[param.substring(1)]
+                  }else{
+                    return null;
+                  }
+                }
+              }(param));
             } else {
                 url = `${url}:${param}/`;
                 param_builder.push(function(param) {
