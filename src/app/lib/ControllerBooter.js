@@ -3,8 +3,8 @@ import ControllerLoader from "./ControllerLoader";
 import path from "path";
 import glob from "glob";
 export default class ControllerBooter extends ControllerLoader {
-    constructor(express) {
-        super(express);
+    constructor(express,bodyParser) {
+        super(express,bodyParser);
         this.routes = [];
     }
 

@@ -10,6 +10,7 @@ import ControllerBooter from "./lib/ControllerBooter";
   This can be changed but it is not advised
 *******************************************/
 import express from "express";
+import bodyParser from "body-parser";
 
 
 
@@ -20,7 +21,7 @@ import express from "express";
   You can install middleware here if you want.
 
 ******************************************/
-let booter = new ControllerBooter(express);
+let booter = new ControllerBooter(express,bodyParser);
 
 
 

@@ -5,12 +5,12 @@ import _ from "lodash";
 import decamelize from "decamelize";
 
 export default class ControllerLoader {
-  constructor(express) {
+  constructor(express,bodyParser) {
     this.express = express;
     this.app = express();
     this.getRegexp = /^get/i;
     this.postRegexp = /^post/i;
-    
+
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;

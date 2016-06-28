@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "acorn": "^3.2.0",
+    "body-parser": "^1.15.2",
     "class-autobind": "^0.1.4",
     "es6-class-auto-bind": "^1.0.0",
     "glob": "^7.0.5"
