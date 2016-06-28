@@ -53,10 +53,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ControllerBooter = function (_ControllerLoader) {
     (0, _inherits3.default)(ControllerBooter, _ControllerLoader);
 
-    function ControllerBooter(express) {
+    function ControllerBooter(express, bodyParser) {
         (0, _classCallCheck3.default)(this, ControllerBooter);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ControllerBooter).call(this, express));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ControllerBooter).call(this, express, bodyParser));
 
         _this.routes = [];
         return _this;

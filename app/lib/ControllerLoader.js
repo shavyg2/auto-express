@@ -29,7 +29,7 @@ var _decamelize2 = _interopRequireDefault(_decamelize);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ControllerLoader = function () {
-  function ControllerLoader(express) {
+  function ControllerLoader(express, bodyParser) {
     (0, _classCallCheck3.default)(this, ControllerLoader);
 
     this.express = express;
@@ -42,7 +42,6 @@ var ControllerLoader = function () {
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;
-    this.preRegexp = /^pre/i;
     this.function_params_regex = /\(([^)]+)\)/;
     this.controllers = [];
   }
@@ -86,9 +85,6 @@ var ControllerLoader = function () {
       } else if (this.postRegexp.test(key)) {
         meta.type = "post";
         meta.regex = this.postRegexp;
-      } else if (this.preRegexp.test(key)) {
-        meta.type = "pre";
-        meta.regex = this.preRegexp;
       }
     }
   }, {

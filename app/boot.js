@@ -13,6 +13,10 @@ var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
 
+var _bodyParser = require("body-parser");
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /******************************************
@@ -21,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   You can install middleware here if you want.
 
 ******************************************/
-var booter = new _ControllerBooter2.default(_express2.default);
+
 
 /*******************************************
   Express is the default application user.
@@ -29,7 +33,7 @@ var booter = new _ControllerBooter2.default(_express2.default);
   of express that is better to use.
   This can be changed but it is not advised
 *******************************************/
-
+var booter = new _ControllerBooter2.default(_express2.default, _bodyParser2.default);
 
 var Boot = exports.Boot = function Boot(port, cb) {
   port = port || 3000;

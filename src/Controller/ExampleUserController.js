@@ -25,7 +25,7 @@ export default class UserController extends BaseController {
   }
 
   static get route() {
-    return "/user";
+    return "/example_user";
   }
 }
 

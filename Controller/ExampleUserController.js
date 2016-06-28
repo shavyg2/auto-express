@@ -64,7 +64,7 @@ var UserController = function (_BaseController) {
   }], [{
     key: "route",
     get: function get() {
-      return "/user";
+      return "/example_user";
     }
   }]);
   return UserController;
