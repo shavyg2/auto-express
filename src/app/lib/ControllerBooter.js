@@ -3,8 +3,8 @@ import ControllerLoader from "./ControllerLoader";
 import path from "path";
 import glob from "glob";
 export default class ControllerBooter extends ControllerLoader {
-    constructor(express,bodyParser) {
-        super(express,bodyParser);
+    constructor(express, bodyParser) {
+        super(express, bodyParser);
         this.routes = [];
     }
 
@@ -69,6 +69,7 @@ export default class ControllerBooter extends ControllerLoader {
 
 
         let static_route = `/${method_meta.name}${url}`;
+        static_route = static_route[0] === "/" ? static_route : "/" + static_route;
         static_route = static_route.replace(/\/{2,}/g, "/");
 
 
@@ -78,13 +79,14 @@ export default class ControllerBooter extends ControllerLoader {
 
         ***********************************/
 
-        console.log(`${method_meta.type.toUpperCase()}: ${_controller.class.route}/${static_route}`);
+        console.log(`${method_meta.type.toUpperCase()}: ${_controller.class.route}${static_route}`);
 
         /***************************************
 
           Meta Data end
 
         ****************************************/
+
 
         route[method_meta.type].call(route, static_route, function(req, res, next) {
             let controller = Object.create(_controller.class.prototype);
@@ -97,8 +99,8 @@ export default class ControllerBooter extends ControllerLoader {
             controller.params = req.params;
             var params_built = _(param_builder).map(x => x(req, res)).value();
             _controller.class.call(controller);
-            controller._run(function(){
-              controller[method_meta.functionName].apply(controller, params_built);
+            controller._run(function() {
+                controller[method_meta.functionName].apply(controller, params_built);
             })
         });
     }

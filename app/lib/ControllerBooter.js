@@ -176,13 +176,14 @@ var ControllerBooter = function (_ControllerLoader) {
             }
 
             var static_route = "/" + method_meta.name + url;
+            static_route = static_route[0] === "/" ? static_route : "/" + static_route;
             static_route = static_route.replace(/\/{2,}/g, "/");
 
             /***********************************
                Meta Data
              ***********************************/
 
-            console.log(method_meta.type.toUpperCase() + ": " + _controller.class.route + "/" + static_route);
+            console.log(method_meta.type.toUpperCase() + ": " + _controller.class.route + static_route);
 
             /***************************************
                Meta Data end
