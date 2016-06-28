@@ -16,7 +16,6 @@ export default class ControllerLoader {
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;
     this.postRegexp = /^post/i;
-    this.preRegexp = /^pre/i;
     this.function_params_regex = /\(([^)]+)\)/
     this.controllers = [];
   }
@@ -58,9 +57,6 @@ export default class ControllerLoader {
     } else if (this.postRegexp.test(key)) {
       meta.type = "post";
       meta.regex = this.postRegexp;
-    } else if (this.preRegexp.test(key)) {
-      meta.type = "pre";
-      meta.regex = this.preRegexp;
     }
   }
 
