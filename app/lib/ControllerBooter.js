@@ -1,53 +1,54 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+var _create = require("babel-runtime/core-js/object/create");
+
+var _create2 = _interopRequireDefault(_create);
+
+var _getIterator2 = require("babel-runtime/core-js/get-iterator");
 
 var _getIterator3 = _interopRequireDefault(_getIterator2);
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _possibleConstructorReturn2 = require("babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _lodash = require('lodash');
+var _lodash = require("lodash");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _ControllerLoader2 = require('./ControllerLoader');
+var _ControllerLoader2 = require("./ControllerLoader");
 
 var _ControllerLoader3 = _interopRequireDefault(_ControllerLoader2);
 
-var _path = require('path');
+var _path = require("path");
 
 var _path2 = _interopRequireDefault(_path);
 
-var _glob = require('glob');
+var _glob = require("glob");
 
 var _glob2 = _interopRequireDefault(_glob);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var hot_pepper_logger = require('hot-pepper-logger-interface/lib/FileLogInterface').default || require('hot-pepper-logger-interface/lib/FileLogInterface');
-hot_pepper_logger = new hot_pepper_logger({ 'file': 'logger.log' });
 
 var ControllerBooter = function (_ControllerLoader) {
     (0, _inherits3.default)(ControllerBooter, _ControllerLoader);
@@ -62,21 +63,21 @@ var ControllerBooter = function (_ControllerLoader) {
     }
 
     (0, _createClass3.default)(ControllerBooter, [{
-        key: 'start',
+        key: "start",
         value: function start(dir) {
-            dir = dir || _path2.default.resolve(__dirname, '../../Controller');
+            dir = dir || _path2.default.resolve(__dirname, "../../Controller");
             this.bootdir(dir);
             this.boot();
         }
     }, {
-        key: 'listen',
+        key: "listen",
         value: function listen(port, hostname, backlog, callback) {
             this.app.listen(port, hostname, backlog, callback);
         }
     }, {
-        key: 'bootdir',
+        key: "bootdir",
         value: function bootdir(dir) {
-            var controllers_path_glob = _path2.default.join(dir, '**/*Controller.js');
+            var controllers_path_glob = _path2.default.join(dir, "**/*Controller.js");
             var controllers_file_path = _glob2.default.sync(controllers_path_glob);
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -104,7 +105,7 @@ var ControllerBooter = function (_ControllerLoader) {
             }
         }
     }, {
-        key: 'boot',
+        key: "boot",
         value: function boot() {
             var _this2 = this;
 
@@ -113,13 +114,13 @@ var ControllerBooter = function (_ControllerLoader) {
             });
         }
     }, {
-        key: 'bootController',
+        key: "bootController",
         value: function bootController(controller) {
             var get_methods = this.getMethodsByType(controller);
             this.bootMethods(controller, get_methods);
         }
     }, {
-        key: 'bootMethods',
+        key: "bootMethods",
         value: function bootMethods(controller, methods) {
             var _this3 = this;
 
@@ -130,12 +131,13 @@ var ControllerBooter = function (_ControllerLoader) {
                     _this3.bootMethod(route, controller, method);
                 });
             });
-            this.app.use('' + controller.class.route, route);
+            this.app.use("" + controller.class.route, route);
         }
     }, {
-        key: 'bootMethod',
+        key: "bootMethod",
         value: function bootMethod(route, _controller, method_meta) {
-            var url = '/';
+            // let controller = new _controller.class();
+            var url = "/";
             var param_builder = [];
             var _iteratorNormalCompletion2 = true;
             var _didIteratorError2 = false;
@@ -150,7 +152,7 @@ var ControllerBooter = function (_ControllerLoader) {
                             return _controller.class.ioc[param];
                         });
                     } else {
-                        url = url + ':' + param + '/';
+                        url = url + ":" + param + "/";
                         param_builder.push(function (param) {
                             return function (req, res) {
                                 return req.params[param];
@@ -173,10 +175,10 @@ var ControllerBooter = function (_ControllerLoader) {
                 }
             }
 
-            var static_route = '/' + method_meta.name + url;
-            static_route = static_route.replace(/\/{2,}/g, '/');
+            var static_route = "/" + method_meta.name + url;
+            static_route = static_route.replace(/\/{2,}/g, "/");
             route[method_meta.type].call(route, static_route, function (req, res, next) {
-                var controller = new _controller.class();
+                var controller = (0, _create2.default)(_controller.class.prototype);
                 controller.req = req;
                 controller.res = res;
                 controller.next = next;
@@ -187,11 +189,14 @@ var ControllerBooter = function (_ControllerLoader) {
                 var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
                     return x(req, res);
                 }).value();
-                controller[method_meta.functionName].apply(controller, params_built);
+                _controller.class.call(controller);
+                controller._run(function () {
+                    controller[method_meta.functionName].apply(controller, params_built);
+                });
             });
         }
     }, {
-        key: 'getMethodsByType',
+        key: "getMethodsByType",
         value: function getMethodsByType(controller) {
             var methods = {};
             methods.get = this.getGetMethods(controller);
@@ -200,34 +205,34 @@ var ControllerBooter = function (_ControllerLoader) {
             return methods;
         }
     }, {
-        key: 'getGetMethods',
+        key: "getGetMethods",
         value: function getGetMethods(controller) {
             return (0, _lodash2.default)(controller).filter(function (value, key) {
                 return _lodash2.default.isObject(value);
             }).filter(function (value, key) {
-                return value.type === 'get';
+                return value.type === "get";
             }).map(function (method) {
                 return method;
             }).value();
         }
     }, {
-        key: 'getPostMethods',
+        key: "getPostMethods",
         value: function getPostMethods(controller) {
             return (0, _lodash2.default)(controller).filter(function (value, key) {
                 return _lodash2.default.isObject(value);
             }).filter(function (value, key) {
-                return value.type === 'post';
+                return value.type === "post";
             }).map(function (method) {
                 return method;
             }).value();
         }
     }, {
-        key: 'getPreMethods',
+        key: "getPreMethods",
         value: function getPreMethods(controller) {
             return (0, _lodash2.default)(controller).filter(function (value, key) {
                 return _lodash2.default.isObject(value);
             }).filter(function (value, key) {
-                return value.type === 'pre';
+                return value.type === "pre";
             }).map(function (method) {
                 return method;
             }).value();

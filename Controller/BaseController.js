@@ -1,44 +1,64 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _classCallCheck2 = require("babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _createClass2 = require("babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _lodash = require('lodash');
+var _lodash = require("lodash");
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var hot_pepper_logger = require('hot-pepper-logger-interface/lib/FileLogInterface').default || require('hot-pepper-logger-interface/lib/FileLogInterface');
-hot_pepper_logger = new hot_pepper_logger({ 'file': 'logger.log' });
-
 var BaseController = function () {
-    function BaseController() {
-        (0, _classCallCheck3.default)(this, BaseController);
-    }
+  function BaseController() {
+    (0, _classCallCheck3.default)(this, BaseController);
 
-    (0, _createClass3.default)(BaseController, null, [{
-        key: 'route',
-        get: function get() {
-            return '/';
+    this._pre = [];
+  }
+
+  (0, _createClass3.default)(BaseController, [{
+    key: "pre",
+    value: function pre(func) {
+      this._pre.push(func);
+      return this;
+    }
+  }, {
+    key: "_run",
+    value: function _run(cb) {
+      var pre = _lodash2.default.clone(this._pre);
+      var self = this;
+      var next = function next() {
+        if (pre.length > 0) {
+          var now = pre.unshift();
+          now(self.req, this.res, next);
+        } else {
+          if (_lodash2.default.isFunction(cb)) {
+            cb();
+          }
         }
-    }]);
-    return BaseController;
+      };
+
+      next();
+    }
+  }], [{
+    key: "route",
+    get: function get() {
+      return "/";
+    }
+  }]);
+  return BaseController;
 }();
 
 exports.default = BaseController;
 
+
 BaseController.ioc = [];
-hot_pepper_logger.log({
-    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\Controller\\BaseController.js',
-    'variable': 'BaseController.ioc'
-}, BaseController.ioc);

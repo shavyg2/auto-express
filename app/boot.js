@@ -1,44 +1,52 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.boot = exports.Boot = undefined;
 
-var _ControllerBooter = require('./lib/ControllerBooter');
+var _ControllerBooter = require("./lib/ControllerBooter");
 
 var _ControllerBooter2 = _interopRequireDefault(_ControllerBooter);
 
-var _express = require('express');
+var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var hot_pepper_logger = require('hot-pepper-logger-interface/lib/FileLogInterface').default || require('hot-pepper-logger-interface/lib/FileLogInterface');
-hot_pepper_logger = new hot_pepper_logger({ 'file': 'logger.log' });
+/******************************************
 
+  Place custom express routes on booter.app
+  You can install middleware here if you want.
+
+******************************************/
 var booter = new _ControllerBooter2.default(_express2.default);
-hot_pepper_logger.log({
-    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
-    'variable': 'booter'
-}, booter);
-var Boot = exports.Boot = function Boot(port) {
-    port = port || 3000;
-    hot_pepper_logger.log({
-        'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
-        'method': 'anonymous',
-        'variable': 'port'
-    }, port);
-    booter.start();
-    booter.listen(3000);
+
+/*******************************************
+  Express is the default application user.
+  Express is passed in incase there is some fork
+  of express that is better to use.
+  This can be changed but it is not advised
+*******************************************/
+
+
+var Boot = exports.Boot = function Boot(port, cb) {
+  port = port || 3000;
+  /******************************************
+   This is a sync operation that will load
+  all the controllers and creates the
+  route for the controllers.
+   ******************************************/
+  booter.start();
+
+  /********************************
+  This will start you application.
+  booter exposes the booter.app property
+  *********************************/
+  booter.listen(3000, cb);
+
+  return booter;
 };
-hot_pepper_logger.log({
-    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
-    'variable': 'Boot'
-}, Boot);
+
 var boot = exports.boot = Boot;
-hot_pepper_logger.log({
-    'filename': 'C:\\Users\\shava\\Documents\\dev\\TaskFactor\\src\\app\\boot.js',
-    'variable': 'boot'
-}, boot);
