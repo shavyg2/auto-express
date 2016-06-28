@@ -53,29 +53,27 @@ export default class ControllerBooter extends ControllerLoader {
         var url = "/";
         const param_builder = [];
         for (var param of method_meta.params) {
-            if (_.hasIn(_controller.class.ioc, param)) {
-                param_builder.push(function(req, res) {
-                    return _controller.class.ioc[param];
-                })
-            } else if (param && param[0] === "$") {
-                param_builder.push(function(param) {
-                    return function(req, res) {
+            (function(param) {
+                if (_.hasIn(_controller.class.ioc, param)) {
+                    param_builder.push(function(req, res) {
+                        return _controller.class.ioc[param];
+                    })
+                } else if (param && param[0] === "$") {
+                    param_builder.push(function(req, res) {
                         param = param.substring(1);
                         if (req.body && req.body[param]) {
                             return req.body[param];
                         } else {
                             return null;
                         }
-                    }
-                }(param));
-            } else {
-                url = `${url}:${param}/`;
-                param_builder.push(function(param) {
-                    return function(req, res) {
+                    });
+                } else {
+                    url = `${url}:${param}/`;
+                    param_builder.push(function(req, res) {
                         return req.params[param];
-                    }
-                }(param));
-            }
+                    });
+                }
+            })(param);
         }
 
 
@@ -108,9 +106,9 @@ export default class ControllerBooter extends ControllerLoader {
             controller.global = req.app.local;
             controller.app = req.app;
             controller.params = req.params;
-            var params_built = _(param_builder).map(x => x(req, res)).value();
             _controller.class.call(controller);
             controller._run(function() {
+                var params_built = _(param_builder).map(x => x(req, res)).value();
                 controller[method_meta.functionName].apply(controller, params_built);
             })
         });
