@@ -19,7 +19,7 @@ export default class BaseController {
     let self = this;
     let next = function(){
       if(pre.length>0){
-        let now = pre.unshift();
+        let now = pre.shift();
         console.log(now,pre.length);
         now(self.req,self.res,next);
       }else{

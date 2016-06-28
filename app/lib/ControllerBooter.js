@@ -151,6 +151,17 @@ var ControllerBooter = function (_ControllerLoader) {
                         param_builder.push(function (req, res) {
                             return _controller.class.ioc[param];
                         });
+                    } else if (param && param[0] === "$") {
+                        param_builder.push(function (param) {
+                            return function (req, res) {
+                                param = param.substring(1);
+                                if (req.body && req.body[param]) {
+                                    return req.body[param];
+                                } else {
+                                    return null;
+                                }
+                            };
+                        }(param));
                     } else {
                         url = url + ":" + param + "/";
                         param_builder.push(function (param) {
@@ -180,14 +191,14 @@ var ControllerBooter = function (_ControllerLoader) {
             static_route = static_route.replace(/\/{2,}/g, "/");
 
             /***********************************
-               Meta Data
-             ***********************************/
+                Meta Data
+              ***********************************/
 
             console.log(method_meta.type.toUpperCase() + ": " + _controller.class.route + static_route);
 
             /***************************************
-               Meta Data end
-             ****************************************/
+                Meta Data end
+              ****************************************/
 
             route[method_meta.type].call(route, static_route, function (req, res, next) {
                 var controller = (0, _create2.default)(_controller.class.prototype);

@@ -38,10 +38,10 @@ var booter = new _ControllerBooter2.default(_express2.default, _bodyParser2.defa
 var Boot = exports.Boot = function Boot(port, cb) {
   port = port || 3000;
   /******************************************
-   This is a sync operation that will load
+    This is a sync operation that will load
   all the controllers and creates the
   route for the controllers.
-   ******************************************/
+    ******************************************/
   booter.start();
 
   /********************************
