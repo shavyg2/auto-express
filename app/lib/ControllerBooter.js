@@ -177,6 +177,17 @@ var ControllerBooter = function (_ControllerLoader) {
 
             var static_route = "/" + method_meta.name + url;
             static_route = static_route.replace(/\/{2,}/g, "/");
+
+            /***********************************
+               Meta Data
+             ***********************************/
+
+            console.log(method_meta.type.toUpperCase() + ": " + static_route);
+
+            /***************************************
+               Meta Data end
+             ****************************************/
+
             route[method_meta.type].call(route, static_route, function (req, res, next) {
                 var controller = (0, _create2.default)(_controller.class.prototype);
                 controller.req = req;

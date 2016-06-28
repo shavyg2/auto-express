@@ -70,6 +70,22 @@ export default class ControllerBooter extends ControllerLoader {
 
         let static_route = `/${method_meta.name}${url}`;
         static_route = static_route.replace(/\/{2,}/g, "/");
+
+
+        /***********************************
+
+          Meta Data
+
+        ***********************************/
+
+        console.log(`${method_meta.type.toUpperCase()}: ${static_route}`);
+
+        /***************************************
+
+          Meta Data end
+
+        ****************************************/
+
         route[method_meta.type].call(route, static_route, function(req, res, next) {
             let controller = Object.create(_controller.class.prototype);
             controller.req = req;
