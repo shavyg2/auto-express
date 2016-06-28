@@ -21,7 +21,7 @@ export default class BaseController {
     let next = function(){
       if(pre.length>0){
         let now = pre.unshift();
-        now(self.req,this.res,next);
+        now(self.req,self.res,next);
       }else{
         if(_.isFunction(cb)){
           cb();
