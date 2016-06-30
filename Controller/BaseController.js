@@ -39,7 +39,6 @@ var BaseController = function () {
       var next = function next() {
         if (pre.length > 0) {
           var now = pre.shift();
-          console.log(now, pre.length);
           now(self.req, self.res, next);
         } else {
           if (_lodash2.default.isFunction(cb)) {

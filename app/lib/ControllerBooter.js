@@ -147,29 +147,27 @@ var ControllerBooter = function (_ControllerLoader) {
                 for (var _iterator2 = (0, _getIterator3.default)(method_meta.params), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                     var param = _step2.value;
 
-                    if (_lodash2.default.hasIn(_controller.class.ioc, param)) {
-                        param_builder.push(function (req, res) {
-                            return _controller.class.ioc[param];
-                        });
-                    } else if (param && param[0] === "$") {
-                        param_builder.push(function (param) {
-                            return function (req, res) {
+                    (function (param) {
+                        if (_lodash2.default.hasIn(_controller.class.ioc, param)) {
+                            param_builder.push(function (req, res) {
+                                return _controller.class.ioc[param];
+                            });
+                        } else if (param && param[0] === "$") {
+                            param_builder.push(function (req, res) {
                                 param = param.substring(1);
                                 if (req.body && req.body[param]) {
                                     return req.body[param];
                                 } else {
                                     return null;
                                 }
-                            };
-                        }(param));
-                    } else {
-                        url = url + ":" + param + "/";
-                        param_builder.push(function (param) {
-                            return function (req, res) {
+                            });
+                        } else {
+                            url = url + ":" + param + "/";
+                            param_builder.push(function (req, res) {
                                 return req.params[param];
-                            };
-                        }(param));
-                    }
+                            });
+                        }
+                    })(param);
                 }
             } catch (err) {
                 _didIteratorError2 = true;
@@ -209,11 +207,11 @@ var ControllerBooter = function (_ControllerLoader) {
                 controller.global = req.app.local;
                 controller.app = req.app;
                 controller.params = req.params;
-                var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
-                    return x(req, res);
-                }).value();
                 _controller.class.call(controller);
                 controller._run(function () {
+                    var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
+                        return x(req, res);
+                    }).value();
                     controller[method_meta.functionName].apply(controller, params_built);
                 });
             });
