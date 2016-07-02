@@ -1,6 +1,6 @@
 import MessageController from "./Message";
 
-class ErrorStatus extends MessageController {
+export default class ErrorStatus extends MessageController {
     constructor(res) {
         super();
         this.res = res;
