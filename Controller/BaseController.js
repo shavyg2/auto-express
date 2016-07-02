@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _create = require("babel-runtime/core-js/object/create");
+
+var _create2 = _interopRequireDefault(_create);
+
 var _getPrototypeOf = require("babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -89,10 +93,18 @@ var BaseController = function (_ErrorStatus) {
     }, {
         key: "render",
         value: function render(file, data) {
+            data = data || {};
+            data = _lodash2.default.defaults(data, this.local);
+            data = _lodash2.default.defaults(data, this.global);
+
             if (!this.renderer) {
                 throw new Error("no renderer selected\nSet renderer in constructor");
             } else {
-                var renderer = new this.rendered(this.renderer_options);
+
+                //TODO check if instance of renderer
+                var renderer = (0, _create2.default)(this.renderer.prototype);
+
+                renderer = this.renderer.call(renderer, this.renderer_options);
                 var content = renderer.render(file, data);
                 this.status.ok(content);
             }
