@@ -1,7 +1,7 @@
 import BaseController from "./BaseController";
 import _ from "lodash";
 
-export default class UserController extends BaseController {
+export default class HomeController extends BaseController {
   /****************************
 
     When the constructor is called
@@ -12,52 +12,11 @@ export default class UserController extends BaseController {
     super();
   }
 
-  get(id,UserService) {
-    var user = UserService.find(id);
-    this.res.send("Hello World");
-  }
-
-  postCreate(firstname,lastname,UserService){
-      UserService.create({
-        firstname,
-        lastname
-      });
+  get() {
+    this.render("swing_example_renderer.html",{message:"Welcome"});
   }
 
   static get route() {
-    return "/example_user";
+    return "/example_home";
   }
-}
-
-
-
-let ioc;
-
-
-UserController.ioc = ioc = [];
-
-ioc["UserService"] = {
-  id: 0,
-  store: [],
-  find: function(id) {
-    var found = _(this.store).filter(x => x.id === id).value();
-    return found;
-  },
-  create: function(user) {
-    this.store.push(user);
-    user.id = ++this.id;
-  },
-  findOne: function(id) {
-    var results = this.find(id);
-    return results.length ? results[0] : null
-  },
-  delete:function(id){
-    var index = this.store.indexOf(id);
-    //cute trick
-    if(~index){
-      this.store.slice(index,1);
-      //Baby Gone Gone
-    }
-  }
-
 }
