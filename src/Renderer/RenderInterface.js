@@ -1,23 +1,53 @@
-wimport path from "path";
+import path from "path";
 import fs from "fs";
 
 export default class Render{
+
+
   constructor(options){
     options = options || {};
-    this._basePath =  options.basePath || options.base_path || options.BasePath;
+    this._basePath =  options.basePath || options.base_path || options.BasePath || options.base;
     this._basePath =  path.resolve(this._basePath);
     this._template_store={};
   }
 
   render(file,data){
-    var absolute_file = path.join(this._basePath,)
+    var absolute_file;
+    if(!path.isAbsolute(file)){
+     absolute_file = path.join(this._basePath,file);
+   }else{
+     absolute_file = file;
+   }
+   let view;
+   if(this.isCompilable){
+     if(!this.store[file]){
+       this.store[file] = this.compile(absolute_file);
+     }
+     let  _template = this.store[file];
+     view = _template(data);
+
+   }else{
+     view = this.build_from_file(file,data);
+   }
+
+   return view;
   }
 
-  Compile(file){
-
+  getContent(file){
+    return fs.readFileSync(file,"utf8");
   }
 
-  isCompilable(){
+  build_from_file(file,data){
+    throw new Error("render from file must be implemented");
+  }
+
+  compile(file,data){
+    throw new Error("template function must be implemented");
+  }
+
+
+
+  get isCompilable(){
     return false;
   }
 

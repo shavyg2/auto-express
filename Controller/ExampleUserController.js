@@ -38,9 +38,9 @@ var UserController = function (_BaseController) {
   (0, _inherits3.default)(UserController, _BaseController);
 
   /****************************
-      When the constructor is called
+     When the constructor is called
     the user doesn't have access to alot of information
-    *****************************/
+   *****************************/
 
   function UserController() {
     (0, _classCallCheck3.default)(this, UserController);
