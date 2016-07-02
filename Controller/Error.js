@@ -24,9 +24,9 @@ var _inherits2 = require("babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _MessageController3 = require("./MessageController");
+var _Message = require("./Message");
 
-var _MessageController4 = _interopRequireDefault(_MessageController3);
+var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -379,7 +379,9 @@ var ErrorStatus = function (_MessageController) {
         }
     }]);
     return ErrorStatus;
-}(_MessageController4.default);
+}(_Message2.default);
+
+exports.default = ErrorStatus;
 
 var ErrorController = function (_MessageController2) {
     (0, _inherits3.default)(ErrorController, _MessageController2);
@@ -394,6 +396,6 @@ var ErrorController = function (_MessageController2) {
     }
 
     return ErrorController;
-}(_MessageController4.default);
+}(_Message2.default);
 
 exports.default = ErrorController;

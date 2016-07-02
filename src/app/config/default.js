@@ -6,7 +6,7 @@ module.exports = {
     port:3000
   },
   render:{
-    engine:Renderer
+    engine:Renderer,
     options:{
       base:path.resolve(__dirname,"../../views")
     }

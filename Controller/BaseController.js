@@ -51,7 +51,6 @@ var BaseController = function (_ErrorStatus) {
         var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(BaseController).call(this));
 
         _this._pre = [];
-        _this.renderer = _SwigRenderer2.default;
         _this.renderer_options = {
             base: _path2.default.resolve(__dirname, "../views")
         };

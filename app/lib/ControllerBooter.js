@@ -326,6 +326,8 @@ var ControllerBooter = function (_ControllerLoader) {
                 controller.global = req.app.local;
                 controller.app = req.app;
                 controller.params = req.params;
+                controller.renderer = this.config.render.engine;
+                controller.setRenderOptions(this.config.render.options);
                 _controller.class.call(controller);
                 controller._run(function () {
                     var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
