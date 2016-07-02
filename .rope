@@ -3,6 +3,6 @@
     "src/**/*",
     "Controller/**/*",
     "Service/**/*",
-    "Renderer/**/*"
+    "Renderer/**/*",
     "public/**/*"
 ]
