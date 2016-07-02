@@ -260,7 +260,7 @@ export default class ControllerBooter extends ControllerLoader {
 
 
         ***************************************************************************/
-        route[method_meta.type].call(route, static_route, function(req, res, next) {
+        route[method_meta.type].call(route, static_route, (req, res, next)=>{
             let controller = Object.create(_controller.class.prototype);
             controller.req = req;
             controller.res = res;
