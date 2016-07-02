@@ -1,4 +1,4 @@
-import path from "path";
+wimport path from "path";
 import fs from "fs";
 
 export default class Render{
@@ -14,7 +14,7 @@ export default class Render{
   }
 
   Compile(file){
-    
+
   }
 
   isCompilable(){
