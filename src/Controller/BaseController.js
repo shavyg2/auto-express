@@ -57,10 +57,18 @@ export default class BaseController extends ErrorStatus {
     }
 
     render(file, data) {
+      data= data ||{};
+      data = _.defaults(data,this.local);
+      data = _.defaults(data,this.global);
+
         if (!this.renderer) {
             throw new Error("no renderer selected\nSet renderer in constructor");
         } else {
-            const renderer = new this.rendered(this.renderer_options);
+
+            //TODO check if instance of renderer
+            let renderer = Object.create(this.renderer.prototype);
+
+            renderer = this.renderer.call(renderer, this.renderer_options);
             let content = renderer.render(file, data);
             this.status.ok(content);
         }
