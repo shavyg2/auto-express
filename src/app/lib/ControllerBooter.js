@@ -241,18 +241,21 @@ export default class ControllerBooter extends ControllerLoader {
         Now there is a problem that needs to be solved.
         Express uses middleware.
 
-        Which is easy to type in express. However how to do this the framework
-        need to allow for async middleware.
+        Which is easy to type in express. However how to do this the framework?
+        the framework would need to allow for async middleware.
 
 
         to allow this to happen a pre method was added to the controllers
-        a middle/ middleware function might be alias
+        a middle/middleware function might be alias
 
 
         The middleware is loading in the constructor.
         Then before the method is called.
         It will be passed through all
         the middlewares first.
+
+        The _run function will then execute the callback
+        after all the middleware has ran.
 
 
 
