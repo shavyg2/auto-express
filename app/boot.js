@@ -9,6 +9,10 @@ var _ControllerBooter = require("./lib/ControllerBooter");
 
 var _ControllerBooter2 = _interopRequireDefault(_ControllerBooter);
 
+var _lodash = require("lodash");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
@@ -35,7 +39,7 @@ try {
 } catch (e) {
     config = {};
 } finally {
-    config = _.defaults(config, _config);
+    config = _lodash2.default.defaults(config, _config);
 }
 
 /******************************************
