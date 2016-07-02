@@ -269,6 +269,8 @@ export default class ControllerBooter extends ControllerLoader {
             controller.global = req.app.local;
             controller.app = req.app;
             controller.params = req.params;
+            controller.renderer = this.config.render.engine;
+            controller.setRenderOptions(this.config.render.options);
             _controller.class.call(controller);
             controller._run(function() {
                 var params_built = _(param_builder).map(x => x(req, res)).value();

@@ -7,7 +7,6 @@ export default class BaseController extends ErrorStatus {
     constructor() {
         super();
         this._pre = [];
-        this.renderer = SwigRenderer;
         this.renderer_options = {
             base: path.resolve(__dirname, "../views")
         }
