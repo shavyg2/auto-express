@@ -1,4 +1,4 @@
-import MessageController from "./MessageController";
+import MessageController from "./Message";
 
 class ErrorStatus extends MessageController {
     constructor(res) {
