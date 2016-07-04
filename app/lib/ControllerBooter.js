@@ -63,12 +63,12 @@ var ControllerBooter = function (_ControllerLoader) {
     }
 
     /**********************************************************
-     This will load all the controller files in directory.
+      This will load all the controller files in directory.
     The default controller files are inside the provided controller
     folder.
-     There doesn't seem to be a reason to every need to change
+      There doesn't seem to be a reason to every need to change
     this. However here we are.
-     **********************************************************/
+      **********************************************************/
 
 
     (0, _createClass3.default)(ControllerBooter, [{
@@ -91,12 +91,12 @@ var ControllerBooter = function (_ControllerLoader) {
         }
 
         /********************************************************
-         finds files that ends with the name Controller.js
+          finds files that ends with the name Controller.js
         These are the only ones that are loaded. This leaves
         You to extend and provide other files if needed.
-         Keeping only controllers here is a very clean way
+          Keeping only controllers here is a very clean way
         and should be encouraged.
-         ********************************************************/
+          ********************************************************/
 
     }, {
         key: "bootdir",
@@ -130,8 +130,8 @@ var ControllerBooter = function (_ControllerLoader) {
         }
 
         /***********************************************************
-         Boots controllers
-         ***********************************************************/
+          Boots controllers
+          ***********************************************************/
 
     }, {
         key: "boot",
@@ -144,8 +144,8 @@ var ControllerBooter = function (_ControllerLoader) {
         }
 
         /*********************************************************
-         Boot the methods of a controller
-         *********************************************************/
+          Boot the methods of a controller
+          *********************************************************/
 
     }, {
         key: "bootController",
@@ -155,9 +155,9 @@ var ControllerBooter = function (_ControllerLoader) {
         }
 
         /********************************************************
-         Every Controller get's it's own Router. This will
+          Every Controller get's it's own Router. This will
         make the application perform better
-         *********************************************************/
+          *********************************************************/
 
     }, {
         key: "bootMethods",
@@ -175,44 +175,44 @@ var ControllerBooter = function (_ControllerLoader) {
         }
 
         /**********************************************************
-         each param needs to be handled a little differently.
-          if a param is not in the static ioc property of the class
+          each param needs to be handled a little differently.
+            if a param is not in the static ioc property of the class
         Then the property will be made a param unless it has a $
         infront of it.
-         example:
-         static get route(){
+          example:
+          static get route(){
           return '/user'
         }
         postList(name,$apikey,UserService)
-         A method like this will express the following
+          A method like this will express the following
         url:/user/list/:name
-         Before the method boots. The body property will be accessed
+          Before the method boots. The body property will be accessed
         looking for the a propety called $apikey
         this is to be used as a short hand to get to
         this.req.body.apikey
         you can reference using $apikey in the params
-         The UserService will be another param unless
+          The UserService will be another param unless
         it's in the controllers
         ioc static class property
-         eg
-         export default class UserController extends BaseController{
+          eg
+          export default class UserController extends BaseController{
           constructor(){
             super();
           }
         }
-         UserController.ioc = {
+          UserController.ioc = {
           "UserService":UserServiceInstance
         }
-         The UserServiceInstance will be passed
+          The UserServiceInstance will be passed
         This might get Extended or replaced.
-         It would be nice to place all of this in one spot.
-         Like a register function.
-         It can still be extended.
-         Because of the nature of rope replacing files
+          It would be nice to place all of this in one spot.
+          Like a register function.
+          It can still be extended.
+          Because of the nature of rope replacing files
         It might be hard to do this. However we can just do an entire folder
         So you can seperate them.
-         Something like a register folder might be nice.
-         ***********************************************************/
+          Something like a register folder might be nice.
+          ***********************************************************/
 
         //TODO:split to smaller methods
 
@@ -273,52 +273,52 @@ var ControllerBooter = function (_ControllerLoader) {
             static_route = static_route.replace(/\/{2,}/g, "/");
 
             /***********************************
-               Meta Data
-             ***********************************/
+                Meta Data
+              ***********************************/
 
             console.log(method_meta.type.toUpperCase() + ": " + _controller.class.route + static_route);
 
             /***************************************
-               Meta Data end
-             ****************************************/
+                Meta Data end
+              ****************************************/
 
             /***************************************************************************
-             Controllers are booted in a special way. This is some of the flexibility
+              Controllers are booted in a special way. This is some of the flexibility
             that Javascript offers.
-             First an object is created using the Object.create();
-             This will create the base object to be our class instance.
-             Next certain properties are attached to your controller.
-             The reason for doing it this way is so that in your constructor, you will
+              First an object is created using the Object.create();
+              This will create the base object to be our class instance.
+              Next certain properties are attached to your controller.
+              The reason for doing it this way is so that in your constructor, you will
             have these propeties attached to your instance.
-             This will avoid having to pass in params such as req,res,next
+              This will avoid having to pass in params such as req,res,next
             instead of
-             constructor(req,res,next){
+              constructor(req,res,next){
               super(req,res,next);
             }
-             you can do
+              you can do
             constructor(){
               super();
               this.req;
               this.res;
               this.next;
             }
-             or just
+              or just
             constructor(){
               super();
             }
-              Now there is a problem that needs to be solved.
+                Now there is a problem that needs to be solved.
             Express uses middleware.
-             Which is easy to type in express. However how to do this the framework?
+              Which is easy to type in express. However how to do this the framework?
             the framework would need to allow for async middleware.
-              to allow this to happen a pre method was added to the controllers
+                to allow this to happen a pre method was added to the controllers
             a middle/middleware function might be alias
-              The middleware is loading in the constructor.
+                The middleware is loading in the constructor.
             Then before the method is called.
             It will be passed through all
             the middlewares first.
-             The _run function will then execute the callback
+              The _run function will then execute the callback
             after all the middleware has ran.
-               ***************************************************************************/
+                  ***************************************************************************/
             route[method_meta.type].call(route, static_route, function (req, res, next) {
                 var controller = (0, _create2.default)(_controller.class.prototype);
                 controller.req = req;
@@ -330,6 +330,8 @@ var ControllerBooter = function (_ControllerLoader) {
                 controller.params = req.params;
                 controller.renderer = _this4.config.render.engine;
                 controller.setRenderOptions(_this4.config.render.options);
+                controller.prototype.constructor = _constroller.class;
+                controller = new controller();
                 _controller.class.call(controller);
                 controller._run(function () {
                     var params_built = (0, _lodash2.default)(param_builder).map(function (x) {

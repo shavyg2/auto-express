@@ -55,10 +55,10 @@ booter.config = config;
 var Boot = exports.Boot = function Boot(port, cb) {
     port = config.server.port || 3000;
     /******************************************
-     This is a sync operation that will load
+      This is a sync operation that will load
     all the controllers and creates the
     route for the controllers.
-     ******************************************/
+      ******************************************/
     booter.start();
 
     /********************************

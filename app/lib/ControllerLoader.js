@@ -36,8 +36,8 @@ var ControllerLoader = function () {
     this.app = express();
 
     /*************************
-           API methods
-     *************************/
+            API methods
+      *************************/
     this.getRegexp = /^get/i;
     this.postRegexp = /^post/i;
 
@@ -48,38 +48,38 @@ var ControllerLoader = function () {
     this.lockRegexp = /^lock/i;
 
     /***********************************
-             API methods end
-     ***********************************/
+              API methods end
+      ***********************************/
 
     /***********************************
-     If a function can't be parsed with
+      If a function can't be parsed with
     acorn then functions are toString ed
     and then parsed using a regex to get
     the parameters from the function.
-     As a back up
-     ************************************/
+      As a back up
+      ************************************/
     this.function_params_regex = /\(([^)]+)\)/;
 
     /**************************************
-      This stores not the controllers
+        This stores not the controllers
     but the meta data about controllers
     This might not be the best naming
     for this property
-     **************************************/
+      **************************************/
     this.controllers = [];
   }
 
   /*****************************************
-   This will load a file and expects it to
+    This will load a file and expects it to
   a controller.
-   To support es6 and beyond. The default
+    To support es6 and beyond. The default
   param is checked to see if it's an es6 module
-   There are better ways to check this.
-   Using the prototype of the class
+    There are better ways to check this.
+    Using the prototype of the class
   All methods can be found.
-   This will allow the framework to
+    This will allow the framework to
   interpret if it's a get method and so on
-   *****************************************/
+    *****************************************/
 
 
   (0, _createClass3.default)(ControllerLoader, [{
@@ -94,14 +94,14 @@ var ControllerLoader = function () {
     }
 
     /**************************************
-     Incase at some later date the framework
+      Incase at some later date the framework
     needs some more robust way to get a
     prototype this methods was used.
-     If a prototype doesn't exist
+      If a prototype doesn't exist
     we might create one but this
     might not be a case that will happen.
-     More research might be needed.
-     **************************************/
+      More research might be needed.
+      **************************************/
 
   }, {
     key: "getPrototype",
@@ -110,14 +110,14 @@ var ControllerLoader = function () {
     }
 
     /**********************************************************
-     Once a method is found in a prototype. The framework
+      Once a method is found in a prototype. The framework
     Needs to understand what that method in the controller does
-     This is how.
-     Getting the properties that are attahed only to this prototype.
+      This is how.
+      Getting the properties that are attahed only to this prototype.
     We can get all the methods that are of importance to the framework
-     And leave all the other ones for the user to futher abstract
+      And leave all the other ones for the user to futher abstract
     There application.
-     ***********************************************************/
+      ***********************************************************/
 
   }, {
     key: "getMethodsMetaData",
@@ -136,9 +136,9 @@ var ControllerLoader = function () {
     }
 
     /*******************************************************
-     This will get the method type for the function.
+      This will get the method type for the function.
     Currently this is only working for get and post
-     ********************************************************/
+      ********************************************************/
 
   }, {
     key: "parseMethodType",
@@ -156,14 +156,15 @@ var ControllerLoader = function () {
     meta: The metadata object for the method
     key: the raw name of the method
     method: the actual method
-      This will use decamelize module to create the route
+    
+    This will use decamelize module to create the route
     of the method and attached that to the name name property
     the name of the function will be the original name of the
     prototype.
-     the function is also converted to a string.
+      the function is also converted to a string.
     This will be parsed later.
-     This seems to be a great place for any reflection library
-     **************************************************************/
+      This seems to be a great place for any reflection library
+      **************************************************************/
 
   }, {
     key: "parseMethodName",
@@ -175,11 +176,11 @@ var ControllerLoader = function () {
     }
 
     /*************************************************************
-       using async and await might break this.
+        using async and await might break this.
       So there is a backup of using regex to parse.
-       This might need to be more extended at a later date.
-       With something a little bit more concrete and tested
-     *************************************************************/
+        This might need to be more extended at a later date.
+        With something a little bit more concrete and tested
+      *************************************************************/
 
   }, {
     key: "parseMethodParams",
@@ -203,9 +204,9 @@ var ControllerLoader = function () {
     }
 
     /****************************************************************
-     This will group previously parsed methods so that they can be
+      This will group previously parsed methods so that they can be
     easily used.
-     ****************************************************************/
+      ****************************************************************/
 
   }, {
     key: "parseMethod",

@@ -38,9 +38,9 @@ var HomeController = function (_BaseController) {
   (0, _inherits3.default)(HomeController, _BaseController);
 
   /****************************
-     When the constructor is called
+      When the constructor is called
     the user doesn't have access to alot of information
-   *****************************/
+    *****************************/
 
   function HomeController() {
     (0, _classCallCheck3.default)(this, HomeController);
