@@ -46,8 +46,8 @@ var _path2 = _interopRequireDefault(_path);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var BaseController = function (_ErrorStatus) {
-    (0, _inherits3.default)(BaseController, _ErrorStatus);
+var BaseController = function (_ErrorController) {
+    (0, _inherits3.default)(BaseController, _ErrorController);
 
     function BaseController() {
         (0, _classCallCheck3.default)(this, BaseController);
@@ -106,7 +106,7 @@ var BaseController = function (_ErrorStatus) {
 
                 renderer = this.renderer.call(renderer, this.renderer_options);
                 var content = renderer.render(file, data);
-                this.status.ok(content);
+                this.ok(content);
             }
         }
     }, {

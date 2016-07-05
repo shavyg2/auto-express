@@ -1,9 +1,9 @@
 import _ from "lodash";
 import SwigRenderer from "../Renderer/SwigRenderer";
-import ErrorStatus from "./Error";
+import ErrorController from "./Error";
 import path from "path";
 
-export default class BaseController extends ErrorStatus {
+export default class BaseController extends ErrorController {
     constructor() {
         super();
         this._pre = [];
@@ -70,10 +70,9 @@ export default class BaseController extends ErrorStatus {
 
             renderer = this.renderer.call(renderer, this.renderer_options);
             let content = renderer.render(file, data);
-            this.status.ok(content);
+            this.ok(content);
         }
     }
 }
-
 
 BaseController.ioc = [];

@@ -43,10 +43,10 @@ var Render = function () {
       }
       var view = void 0;
       if (this.isCompilable) {
-        if (!this.store[file]) {
-          this.store[file] = this.compile(absolute_file);
+        if (!this._template_store[file]) {
+          this._template_store[file] = this.compile(absolute_file);
         }
-        var _template = this.store[file];
+        var _template = this._template_store[file];
         view = _template(data);
       } else {
         view = this.build_from_file(file, data);
