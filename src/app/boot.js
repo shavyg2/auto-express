@@ -12,8 +12,7 @@ import _ from "lodash";
 import express from "express";
 import bodyParser from "body-parser";
 
-let config = require("./config/default");
-
+import config from "./config/default";
 
 /******************************************
 
