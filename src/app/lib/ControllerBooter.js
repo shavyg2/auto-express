@@ -271,8 +271,9 @@ export default class ControllerBooter extends ControllerLoader {
             controller.req = req;
             controller.res = res;
             controller.next = next;
-            controller.local = res.locals;
+            controller.local = controller.locals = res.locals;
             controller.global = req.app.locals;
+            controller.global= controller.globals = req.app.locals;
             controller.app = req.app;
             controller.params = req.params;
             controller.renderer = this.config.render.engine;
