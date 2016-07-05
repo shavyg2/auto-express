@@ -12,6 +12,10 @@ var _path = require("path");
 
 var _path2 = _interopRequireDefault(_path);
 
+var _lodash = require("lodash");
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var index = void 0,
@@ -33,4 +37,4 @@ try {
   index = {};
 }
 
-exports.default = _.merge(index, _defaults);
+exports.default = _lodash2.default.merge(index, _defaults);
