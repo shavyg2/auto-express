@@ -31,16 +31,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 *******************************************/
 
 
-var config = void 0,
-    _config = require("./config/default");
-
-try {
-    config = require("./config/index");
-} catch (e) {
-    config = {};
-} finally {
-    config = _lodash2.default.defaults(config, _config);
-}
+var config = require("./config/default");
 
 /******************************************
 
