@@ -4,6 +4,10 @@ import path from "path";
 import glob from "glob";
 
 
+import BaseController from "../../Controller/BaseController";
+import MessageController from "../../Controller/Message";
+
+
 export default class ControllerBooter extends ControllerLoader {
     constructor(express, bodyParser) {
         super(express, bodyParser);
@@ -261,7 +265,9 @@ export default class ControllerBooter extends ControllerLoader {
 
         ***************************************************************************/
         route[method_meta.type].call(route, static_route, (req, res, next)=>{
+
             let controller = Object.create(_controller.class.prototype);
+            // let controller = new _controller.class;
             controller.req = req;
             controller.res = res;
             controller.next = next;
@@ -271,9 +277,7 @@ export default class ControllerBooter extends ControllerLoader {
             controller.params = req.params;
             controller.renderer = this.config.render.engine;
             controller.setRenderOptions(this.config.render.options);
-            controller.prototype.constructor = _constroller.class;
-            controller = new controller();
-            _controller.class.call(controller);
+            controller = _controller.class.call(controller) || controller;
             controller._run(function() {
                 var params_built = _(param_builder).map(x => x(req, res)).value();
                 controller[method_meta.functionName].apply(controller, params_built);

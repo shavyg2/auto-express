@@ -1,9 +1,8 @@
 import MessageController from "./Message";
 
-export default class ErrorStatus extends MessageController {
-    constructor(res) {
+export default class ErrorController extends MessageController {
+    constructor() {
         super();
-        this.res = res;
         this.api = false;
     }
 
@@ -16,9 +15,6 @@ export default class ErrorStatus extends MessageController {
         this.api = false;
     }
 
-    asPage() {
-        this.api = false;
-    }
 
     cont(message) {
         this.res.status(100)
@@ -298,20 +294,6 @@ export default class ErrorStatus extends MessageController {
         }
 
     }
-
-
-}
-
-
-export default class ErrorController extends MessageController {
-    constructor() {
-        super();
-        this.status = new ErrorStatus(this.res);
-    }
-
-
-
-
 
 
 }

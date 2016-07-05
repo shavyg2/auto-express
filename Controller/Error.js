@@ -30,28 +30,22 @@ var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ErrorStatus = function (_MessageController) {
-    (0, _inherits3.default)(ErrorStatus, _MessageController);
+var ErrorController = function (_MessageController) {
+    (0, _inherits3.default)(ErrorController, _MessageController);
 
-    function ErrorStatus(res) {
-        (0, _classCallCheck3.default)(this, ErrorStatus);
+    function ErrorController() {
+        (0, _classCallCheck3.default)(this, ErrorController);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ErrorStatus).call(this));
+        var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ErrorController).call(this));
 
-        _this.res = res;
         _this.api = false;
         return _this;
     }
 
-    (0, _createClass3.default)(ErrorStatus, [{
+    (0, _createClass3.default)(ErrorController, [{
         key: "asApi",
         value: function asApi() {
             this.api = true;
-        }
-    }, {
-        key: "asPage",
-        value: function asPage() {
-            this.api = false;
         }
     }, {
         key: "asPage",
@@ -378,23 +372,6 @@ var ErrorStatus = function (_MessageController) {
             }
         }
     }]);
-    return ErrorStatus;
-}(_Message2.default);
-
-exports.default = ErrorStatus;
-
-var ErrorController = function (_MessageController2) {
-    (0, _inherits3.default)(ErrorController, _MessageController2);
-
-    function ErrorController() {
-        (0, _classCallCheck3.default)(this, ErrorController);
-
-        var _this2 = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(ErrorController).call(this));
-
-        _this2.status = new ErrorStatus(_this2.res);
-        return _this2;
-    }
-
     return ErrorController;
 }(_Message2.default);
 

@@ -48,6 +48,14 @@ var _glob = require("glob");
 
 var _glob2 = _interopRequireDefault(_glob);
 
+var _BaseController = require("../../Controller/BaseController");
+
+var _BaseController2 = _interopRequireDefault(_BaseController);
+
+var _Message = require("../../Controller/Message");
+
+var _Message2 = _interopRequireDefault(_Message);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ControllerBooter = function (_ControllerLoader) {
@@ -320,7 +328,9 @@ var ControllerBooter = function (_ControllerLoader) {
             after all the middleware has ran.
                   ***************************************************************************/
             route[method_meta.type].call(route, static_route, function (req, res, next) {
+
                 var controller = (0, _create2.default)(_controller.class.prototype);
+                // let controller = new _controller.class;
                 controller.req = req;
                 controller.res = res;
                 controller.next = next;
@@ -330,9 +340,7 @@ var ControllerBooter = function (_ControllerLoader) {
                 controller.params = req.params;
                 controller.renderer = _this4.config.render.engine;
                 controller.setRenderOptions(_this4.config.render.options);
-                controller.prototype.constructor = _constroller.class;
-                controller = new controller();
-                _controller.class.call(controller);
+                controller = _controller.class.call(controller) || controller;
                 controller._run(function () {
                     var params_built = (0, _lodash2.default)(param_builder).map(function (x) {
                         return x(req, res);
