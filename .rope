@@ -4,5 +4,7 @@
     "Controller/**/*",
     "Service/**/*",
     "Renderer/**/*",
-    "public/**/*"
+    "public/**/*",
+    "views/**/*"
+
 ]

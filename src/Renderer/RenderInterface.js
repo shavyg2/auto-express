@@ -20,10 +20,10 @@ export default class Render{
    }
    let view;
    if(this.isCompilable){
-     if(!this.store[file]){
-       this.store[file] = this.compile(absolute_file);
+     if(!this._template_store[file]){
+       this._template_store[file] = this.compile(absolute_file);
      }
-     let  _template = this.store[file];
+     let  _template = this._template_store[file];
      view = _template(data);
 
    }else{
