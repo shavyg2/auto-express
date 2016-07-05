@@ -334,8 +334,9 @@ var ControllerBooter = function (_ControllerLoader) {
                 controller.req = req;
                 controller.res = res;
                 controller.next = next;
-                controller.local = res.locals;
+                controller.local = controller.locals = res.locals;
                 controller.global = req.app.locals;
+                controller.global = controller.globals = req.app.locals;
                 controller.app = req.app;
                 controller.params = req.params;
                 controller.renderer = _this4.config.render.engine;
@@ -355,7 +356,6 @@ var ControllerBooter = function (_ControllerLoader) {
             var methods = {};
             methods.get = this.getGetMethods(controller);
             methods.post = this.getPostMethods(controller);
-            methods.pre = this.getPreMethods(controller);
             return methods;
         }
     }, {
@@ -380,6 +380,9 @@ var ControllerBooter = function (_ControllerLoader) {
                 return method;
             }).value();
         }
+
+        //No Longer needed;
+
     }, {
         key: "getPreMethods",
         value: function getPreMethods(controller) {

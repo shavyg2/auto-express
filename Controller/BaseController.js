@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _create = require("babel-runtime/core-js/object/create");
@@ -47,88 +47,88 @@ var _path2 = _interopRequireDefault(_path);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BaseController = function (_ErrorController) {
-    (0, _inherits3.default)(BaseController, _ErrorController);
+  (0, _inherits3.default)(BaseController, _ErrorController);
 
-    function BaseController() {
-        (0, _classCallCheck3.default)(this, BaseController);
+  function BaseController() {
+    (0, _classCallCheck3.default)(this, BaseController);
 
-        var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(BaseController).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(BaseController).call(this));
 
-        _this._pre = [];
-        _this.renderer_options = {
-            base: _path2.default.resolve(__dirname, "../views")
-        };
-        return _this;
+    _this._pre = [];
+    _this.setRenderOptions({
+      base: _path2.default.resolve(__dirname, "../views")
+    });
+    return _this;
+  }
+
+  (0, _createClass3.default)(BaseController, [{
+    key: "pre",
+    value: function pre(func) {
+      this._pre.push(func);
+      return this;
     }
+  }, {
+    key: "_run",
+    value: function _run(cb) {
+      var pre = _lodash2.default.clone(this._pre);
+      var self = this;
+      var next = function next() {
+        if (pre.length > 0) {
+          var now = pre.shift();
+          now(self.req, self.res, next);
+        } else {
+          if (_lodash2.default.isFunction(cb)) {
+            cb();
+          }
+        }
+      };
 
-    (0, _createClass3.default)(BaseController, [{
-        key: "pre",
-        value: function pre(func) {
-            this._pre.push(func);
-            return this;
-        }
-    }, {
-        key: "_run",
-        value: function _run(cb) {
-            var pre = _lodash2.default.clone(this._pre);
-            var self = this;
-            var next = function next() {
-                if (pre.length > 0) {
-                    var now = pre.shift();
-                    now(self.req, self.res, next);
-                } else {
-                    if (_lodash2.default.isFunction(cb)) {
-                        cb();
-                    }
-                }
-            };
+      next();
+    }
+  }, {
+    key: "setRenderOptions",
+    value: function setRenderOptions(options) {
+      this.renderer_options = _lodash2.default.defaults(options, this.renderer_options || {});
+    }
+  }, {
+    key: "render",
+    value: function render(file, data) {
+      data = data || {};
+      data = _lodash2.default.defaults(data, this.local);
+      data = _lodash2.default.defaults(data, this.global);
 
-            next();
-        }
-    }, {
-        key: "setRenderOptions",
-        value: function setRenderOptions(options) {
-            this.renderer_options = _lodash2.default.defaults(options, this.renderer_options || {});
-        }
-    }, {
-        key: "render",
-        value: function render(file, data) {
-            data = data || {};
-            data = _lodash2.default.defaults(data, this.local);
-            data = _lodash2.default.defaults(data, this.global);
+      if (!this.renderer) {
+        throw new Error("no renderer selected\nSet renderer in constructor");
+      } else {
 
-            if (!this.renderer) {
-                throw new Error("no renderer selected\nSet renderer in constructor");
-            } else {
+        //TODO check if instance of renderer
+        var renderer = (0, _create2.default)(this.renderer.prototype);
 
-                //TODO check if instance of renderer
-                var renderer = (0, _create2.default)(this.renderer.prototype);
-
-                renderer = this.renderer.call(renderer, this.renderer_options);
-                var content = renderer.render(file, data);
-                this.ok(content);
-            }
-        }
-    }, {
-        key: "renderer",
-        get: function get() {
-            return this._renderer;
-        },
-        set: function set(value) {
-            this._renderer = value;
-            if (value) {
-                this.asApi();
-            } else {
-                this.asPage();
-            }
-        }
-    }], [{
-        key: "route",
-        get: function get() {
-            return "/";
-        }
-    }]);
-    return BaseController;
+        renderer = this.renderer.call(renderer, this.renderer_options);
+        var content = renderer.render(file, data);
+        this.ok(content);
+      }
+    }
+  }, {
+    key: "renderer",
+    get: function get() {
+      return this._renderer;
+    },
+    set: function set(value) {
+      this._renderer = value;
+      if (value) {
+        this.asApi();
+      } else {
+        this.asPage();
+      }
+    }
+  }], [{
+    key: "route",
+    get: function get() {
+      return "/";
+    }
+  }]);
+  return BaseController;
 }(_Error2.default);
 
 exports.default = BaseController;

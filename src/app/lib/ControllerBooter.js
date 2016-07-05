@@ -6,8 +6,6 @@ import glob from "glob";
 
 import BaseController from "../../Controller/BaseController";
 import MessageController from "../../Controller/Message";
-
-
 export default class ControllerBooter extends ControllerLoader {
     constructor(express, bodyParser) {
         super(express, bodyParser);
@@ -290,7 +288,6 @@ export default class ControllerBooter extends ControllerLoader {
         var methods = {};
         methods.get = this.getGetMethods(controller);
         methods.post = this.getPostMethods(controller);
-        methods.pre = this.getPreMethods(controller);
         return methods;
     }
 
@@ -314,6 +311,8 @@ export default class ControllerBooter extends ControllerLoader {
         }).value();
     }
 
+
+    //No Longer needed;
     getPreMethods(controller) {
         return _(controller).filter((value, key) => {
             return _.isObject(value);
