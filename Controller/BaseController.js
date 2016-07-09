@@ -36,7 +36,7 @@ var _SwigRenderer = require("../Renderer/SwigRenderer");
 
 var _SwigRenderer2 = _interopRequireDefault(_SwigRenderer);
 
-var _Error = require("../lib/Error");
+var _Error = require("./lib/Error");
 
 var _Error2 = _interopRequireDefault(_Error);
 

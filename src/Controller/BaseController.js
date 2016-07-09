@@ -1,6 +1,6 @@
 import _ from "lodash";
 import SwigRenderer from "../Renderer/SwigRenderer";
-import ErrorController from "../lib/Error";
+import ErrorController from "./lib/Error";
 import path from "path";
 
 export default class BaseController extends ErrorController {
