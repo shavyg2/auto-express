@@ -34,73 +34,31 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var UserController = function (_BaseController) {
-  (0, _inherits3.default)(UserController, _BaseController);
+var HomeController = function (_BaseController) {
+  (0, _inherits3.default)(HomeController, _BaseController);
 
   /****************************
       When the constructor is called
     the user doesn't have access to alot of information
     *****************************/
 
-  function UserController() {
-    (0, _classCallCheck3.default)(this, UserController);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UserController).call(this));
+  function HomeController() {
+    (0, _classCallCheck3.default)(this, HomeController);
+    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(HomeController).call(this));
   }
 
-  (0, _createClass3.default)(UserController, [{
+  (0, _createClass3.default)(HomeController, [{
     key: "get",
-    value: function get(id, UserService) {
-      var user = UserService.find(id);
-      this.res.send("Hello World");
-    }
-  }, {
-    key: "postCreate",
-    value: function postCreate(firstname, lastname, UserService) {
-      UserService.create({
-        firstname: firstname,
-        lastname: lastname
-      });
+    value: function get() {
+      this.render("swing_example_renderer.html", { message: "Welcome" });
     }
   }], [{
     key: "route",
     get: function get() {
-      return "/example_user";
+      return "/example_home";
     }
   }]);
-  return UserController;
+  return HomeController;
 }(_BaseController3.default);
 
-exports.default = UserController;
-
-
-var ioc = void 0;
-
-UserController.ioc = ioc = [];
-
-ioc["UserService"] = {
-  id: 0,
-  store: [],
-  find: function find(id) {
-    var found = (0, _lodash2.default)(this.store).filter(function (x) {
-      return x.id === id;
-    }).value();
-    return found;
-  },
-  create: function create(user) {
-    this.store.push(user);
-    user.id = ++this.id;
-  },
-  findOne: function findOne(id) {
-    var results = this.find(id);
-    return results.length ? results[0] : null;
-  },
-  delete: function _delete(id) {
-    var index = this.store.indexOf(id);
-    //cute trick
-    if (~index) {
-      this.store.slice(index, 1);
-      //Baby Gone Gone
-    }
-  }
-
-};
+exports.default = HomeController;
